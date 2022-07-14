@@ -29,7 +29,7 @@ def frequency_validation():
 
     # z = float(frequency_list[14])
     # z += 1
-    # print(z) xd
+    # print(z)
 
     z = frequency_list
     # z += 1
