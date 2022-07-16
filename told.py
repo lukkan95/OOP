@@ -1,4 +1,5 @@
 import csv
+import unidecode
 
 def instantiate_from_csv():
     #vcs_file = str(input('Please enter path to vcs_file: '))
@@ -7,37 +8,62 @@ def instantiate_from_csv():
         reader = csv.reader(f)
         items = list(reader)
         return items
-def visualization_of_variables():
-    items = instantiate_from_csv()
-    for x in range(3, len(items)):
-        # print(items[x][1])
-        print(items[x][1], '|', items[x][2], '|', items[x][3], '|', items[x][4])
-
 def frequency_validation():
     items = instantiate_from_csv()
     frequency_list = []
-    for x in range(4, len(items)):
+    for x in range(4, len(items)-1):
         frequency = str(items[x][1])
+        frequency = unidecode.unidecode(frequency)
         frequency = frequency.replace(' ', '.')
-
         frequency = frequency.strip('.')
-        # frequency = frequency.translate({ord(" "): ""})
-        # x = float(frequency)
-        # print(f'{x:.30f}')
-        # print(frequency)
         frequency_list.append(frequency)
-
-    # z = float(frequency_list[14])
-    # z += 1
-    # print(z)
-
-    z = frequency_list
-    # z += 1
-    print(z)
+    return frequency_list
 
 
+def mass_share_X_axe():
+    items = instantiate_from_csv()
+    mass_x_list = []
+    for x in range(4, len(items) - 1):
+        mass_x = str(items[x][2])
+        mass_x = unidecode.unidecode(mass_x)
+        mass_x = mass_x.replace(' ', '.')
+        mass_x = mass_x.strip('.')
+        mass_x_list.append(mass_x)
+
+    return mass_x_list
+
+def mass_share_Y_axe():
+    items = instantiate_from_csv()
+    mass_y_list = []
+    for y in range(4, len(items) - 1):
+        mass_y = str(items[y][3])
+        mass_y = unidecode.unidecode(mass_y)
+        mass_y = mass_y.replace(' ', '.')
+        mass_y = mass_y.strip('.')
+        mass_y_list.append(mass_y)
+
+    return mass_y_list
+
+def mass_share_Z_axe():
+    items = instantiate_from_csv()
+    mass_z_list = []
+    for z in range(4, len(items) - 1):
+        mass_z = str(items[z][4])
+        mass_z = unidecode.unidecode(mass_z)
+        mass_z = mass_z.replace(' ', '.')
+        mass_z = mass_z.strip('.')
+        mass_z_list.append(mass_z)
+
+    return mass_z_list
+def visualization_of_variables():
+    frequency = frequency_validation()
+    x = mass_share_X_axe()
+    y = mass_share_Y_axe()
+    z = mass_share_Z_axe()
+
+    for i in range(len(frequency_validation())):
+        # print(items[x][1])
+        print(frequency[i], '|', x[i], '|', y[i], '|', z[i])
 
 
-
-
-frequency_validation()
+visualization_of_variables()
