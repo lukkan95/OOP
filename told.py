@@ -61,10 +61,40 @@ def visualization_of_variables():
     y = mass_share_Y_axe()
     z = mass_share_Z_axe()
 
-    for i in range(len(frequency_validation())):
-        # print(items[x][1])
-        print(frequency[i], '|', x[i], '|', y[i], '|', z[i])
+    zas = [frequency,x,y,z]
+    string_rep = ''
+    # get max column widths for printing
+    width = []
+    for i in range(len(zas)):
+        columns = zas[i]
+        width.append(len(max(columns, key=len)))
+
+    # print the csv strings
+    indices = ["Częstotliwość", "Masa osi X", "Masa osi Y", "Masa osi Z"]
+    indices_row = '   '
+    cells_column = []
+    for idx, col in enumerate(indices):
+        format = '%-' + str(width[idx]) + "s"
+        cells_column.append(format % col)
+    indices_row += '  '.join(cells_column)
+    indices_row += '  \n'
+    for i in range(len(zas[0])):
+
+        string_rep += f'{i + 1} |'
+        cells = []
 
 
+        for a in range(len(zas)):
+            format = str(zas[a][i])
+            cells.append(format)
+
+        string_rep += ' |'.join(cells)
+        string_rep += ' |\n'
+
+    str_len = int(len(string_rep) / 4)
+    string_rep = indices_row + '-' * 60 + '\n' + string_rep + '-' * 60
+
+    print(string_rep)
 visualization_of_variables()
-#ds
+
+
