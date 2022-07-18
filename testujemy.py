@@ -28,7 +28,7 @@ def mass_share_X_axe():
         mass_x = unidecode.unidecode(mass_x)
         mass_x = mass_x.replace(' ', '.')
         mass_x = mass_x.strip('.')
-        mass_x_list.append(float(mass_x))
+        mass_x_list.append(mass_x)
 
     return mass_x_list
 
@@ -40,7 +40,7 @@ def mass_share_Y_axe():
         mass_y = unidecode.unidecode(mass_y)
         mass_y = mass_y.replace(' ', '.')
         mass_y = mass_y.strip('.')
-        mass_y_list.append(float(mass_y))
+        mass_y_list.append(mass_y)
 
     return mass_y_list
 
@@ -52,35 +52,33 @@ def mass_share_Z_axe():
         mass_z = unidecode.unidecode(mass_z)
         mass_z = mass_z.replace(' ', '.')
         mass_z = mass_z.strip('.')
-        mass_z_list.append(float(mass_z))
+        mass_z_list.append(mass_z)
 
     return mass_z_list
 
 def filtration_significant_masses():
-     # input('Please enter the minimum percentage mass share of the mod, or type "skip" to pass filtration: ')
-     # if input == 'skip':
-     #     frequency = frequency_validation()
-     #     x = mass_share_X_axe()
-     #     y = mass_share_Y_axe()
-     #     z = mass_share_Z_axe()
-     #     zas = [frequency, x, y, z]
-     #     return zas
-     # else:
-    frequency = frequency_validation()
-    x = mass_share_X_axe()
-    y = mass_share_Y_axe()
-    z = mass_share_Z_axe()
-    zas_1 = [frequency, x, y, z]
-    zas = [[], [], [], []]
-    for i in range(len(zas_1[0])):
-        if zas_1[1][i] or zas_1[2][i] or zas_1[3][i] > 0.05:
-            zas[0].append(zas_1[0][i])
-            zas[1].append(zas_1[1][i])
-            zas[2].append(zas_1[2][i])
-            zas[3].append(zas_1[3][i])
-        else:
-            continue
-    print(zas_1)
+    choice = input('Please enter the minimum percentage mass share of the mod, or type "skip" to pass filtration: ')
+    if str(choice) == 'skip':
+        frequency = frequency_validation()
+        x = mass_share_X_axe()
+        y = mass_share_Y_axe()
+        z = mass_share_Z_axe()
+        zas = [frequency, x, y, z]
+        return zas
+    else:
+        frequency = frequency_validation()
+        x = mass_share_X_axe()
+        y = mass_share_Y_axe()
+        z = mass_share_Z_axe()
+        zas_1 = [frequency, x, y, z]
+        zas = [[], [], [], []]
+        for i in range(len(zas_1[0])):
+            if float(zas_1[1][i]) > float(choice)/100 or float(zas_1[2][i]) > float(choice)/100 or float(zas_1[3][i]) > float(choice)/100:
+                zas[0].append(zas_1[0][i])
+                zas[1].append(zas_1[1][i])
+                zas[2].append(zas_1[2][i])
+                zas[3].append(zas_1[3][i])
+        return zas
 
 def visualization_of_variables():
     zas = filtration_significant_masses()
@@ -123,10 +121,11 @@ def visualization_of_variables():
         string_rep += ' |'.join(cells)
         string_rep += ' |\n'
 
-    str_len = int(len(string_rep) / 41)
-    string_rep = indices_row + '-' * str_len + '\n' + string_rep + '-' * str_len
+
+    string_rep = indices_row + '-' * 68 + '\n' + string_rep + '-' * 68
 
     print(string_rep)
 
-filtration_significant_masses()
+if __name__ == '__main__':
+    visualization_of_variables()
 
