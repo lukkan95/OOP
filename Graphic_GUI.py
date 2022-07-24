@@ -44,12 +44,23 @@ entry.place(relx=0.1, rely=0.85, relwidth=0.15, relheight=0.04)
 
 
 #button add
-button = tk.Button(text='Zastosuj', font=('Segoe UI', 10), command= lambda: print(1))
+button = tk.Button(text='list1', font=('Segoe UI', 10), command= lambda: list1_values())
 button.place(relx=0.3, rely=0.85, relheight=0.05, relwidth=0.2)
 
 #button add
-button_2 = tk.Button(text='Show all', font=('Segoe UI', 10), command= lambda: None)
+button_2 = tk.Button(text='list2', font=('Segoe UI', 10), command= lambda: list2_values())
 button_2.place(relx=0.5, rely=0.85, relheight=0.05, relwidth=0.2)
+
+#table values
+def list1_values():
+    my_tree.delete(*my_tree.get_children())
+    for i in range(len(list1)):
+        my_tree.insert(parent='', index='end', iid=i, text='', values=(list1[i][0], list1[i][1], list1[i][2], list1[i][3]))
+
+def list2_values():
+    my_tree.delete(*my_tree.get_children())
+    for i in range(len(list2)):
+        my_tree.insert(parent='', index='end', iid=i, text='', values=(list2[i][0], list2[i][1], list2[i][2], list2[i][3]))
 
 
 my_tree.bind('<Button-1>', handle_click)
