@@ -1,6 +1,7 @@
 from tkinter import *
 import tkinter as tk
 from tkinter import ttk
+import random
 
 root = Tk()
 root.title('GUI Solidworks Analysis Data')
@@ -8,8 +9,15 @@ root.geometry('650x500')
 root.resizable(False, False)
 my_tree = ttk.Treeview(root)
 
-list1 = [[i for i in range(4)] for i in range(4)]
-list2 = [[i for i in range(4,8)] for i in range(4)]
+list1 = [[],[],[],[]]
+for i in range(4):
+    for z in range(20):
+        list1[i].append(random.randint(0,10))
+
+list2 = [[],[],[],[]]
+for i in range(4):
+    for z in range(20):
+        list2[i].append(random.randint(0,10))
 
 def handle_click(event):
     if my_tree.identify_region(event.x, event.y) == "separator":
@@ -37,7 +45,7 @@ my_tree.pack(pady=20, fill='y')
 lbl = Label(root, text="Percent mass filter")
 lbl.place(relx=0.1, rely=0.8, relwidth=0.15, relheight=0.04)
 
-entry = tk.Entry(bg='white', font=1)
+entry = tk.Entry(bg='white', font=('Segoe UI', 10), justify=CENTER)
 entry.place(relx=0.1, rely=0.85, relwidth=0.15, relheight=0.04)
 
 #Functions
@@ -54,13 +62,13 @@ button_2.place(relx=0.5, rely=0.85, relheight=0.05, relwidth=0.2)
 #table values
 def list1_values():
     my_tree.delete(*my_tree.get_children())
-    for i in range(len(list1)):
-        my_tree.insert(parent='', index='end', iid=i, text='', values=(list1[i][0], list1[i][1], list1[i][2], list1[i][3]))
+    for i in range(len(list1[0])):
+        my_tree.insert(parent='', index='end', iid=i, text='', values=(list1[0][i], list1[1][i], list1[2][i], list1[3][i]))
 
 def list2_values():
     my_tree.delete(*my_tree.get_children())
-    for i in range(len(list2)):
-        my_tree.insert(parent='', index='end', iid=i, text='', values=(list2[i][0], list2[i][1], list2[i][2], list2[i][3]))
+    for i in range(len(list2[0])):
+        my_tree.insert(parent='', index='end', iid=i, text='', values=(list2[0][i], list2[1][i], list2[2][i], list2[3][i]))
 
 
 my_tree.bind('<Button-1>', handle_click)
