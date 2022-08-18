@@ -5,14 +5,13 @@ from PIL import ImageTk
 import time
 from tkinter import *
 
+
 class View:
     def __init__(self, root=tk.Tk()):
         self.root = root
         self.root.title('Weather api by city')
-        self.bc_image = tk.PhotoImage(file='./untitled.png')
-        self.start_parameters()
-        self.background()
         self.background_image()
+        self.start_parameters()
         self.upper_frame()
         self.lower_frame()
         self.label1()
@@ -70,14 +69,13 @@ class View:
         self.root.resizable(False, False)
 
     def background_image(self):
-        self.bc_label = tk.Label(self.root, image=self.bc_image)
+        img_url = f'https://images.rawpixel.com/image_1000/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3B4MTQxODI5Ni1pbWFnZS1rd3Z4eGJxNi5qcGc.jpg'
+        u = urlopen(img_url)
+        self.raw_data = u.read()
+        u.close()
+        self.bc_img = ImageTk.PhotoImage(data=self.raw_data)
+        self.bc_label = tk.Label(self.root, image=self.bc_img)
         self.bc_label.place(x=0, y=0, relwidth=1, relheight=1)
-        return self.bc_label
-
-    @staticmethod
-    def background():
-        canvas = tk.Canvas(height=650, width=500)
-        canvas.pack()
 
     def entry1(self):
         self.entry_1 = tk.Entry(self.frame_up, bg='white', justify='center')
